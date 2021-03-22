@@ -29,7 +29,7 @@ class RepositoryInfoPage extends Component {
     async fetchOneHundredCommits(){
         const apiURI = URI.baseRepositoryInfoURI.concat('/', this.state.params.creatorName)
                                                 .concat('/', this.state.params.repositoryName)
-                                                .concat(URI.commitsURI);
+                                                .concat(URI.commitsURI)
                                                 .concat('?',URI.limitPageToHundredURI);
         return await fetch(apiURI).then((response) => response.json());
     }
