@@ -23,7 +23,7 @@ class App extends Component {
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/search/:repositoryName" component={SearchPage} />
-          <Route path="/repository/:repositoryName" component={RepositoryInfoPage} />
+          <Route path="/repository/:creatorName/:repositoryName" component={RepositoryInfoPage} />
         </Switch>
         <Footer></Footer>
       </div>
