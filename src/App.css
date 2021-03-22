@@ -36,3 +36,41 @@
     transform: rotate(360deg);
   }
 }
+/**
+Header
+**/
+section.ant-layout.layout .ant-layout-header{
+  background-color: white;
+  box-shadow: 0 2px 8px #f0f1f2;
+}
+span.ant-input-group-wrapper.ant-input-search.ant-input-search-with-button{
+  margin-top: 5%;
+}
+span.anticon.anticon-github{
+  color: #F07C41;
+}
+button.ant-btn-primary{
+  background-color: #F07C41 !important;
+  border-color: #F07C41 !important;
+}
+.ant-btn-primary:active{
+  background-color: #FFA578 !important;
+  border-color: #FFA578 !important;
+}
+.ant-input-search .ant-input:hover, .ant-input-search .ant-input:focus{
+  border-color: #F07C41 !important;
+}
+/**
+Table
+**/
+h2.table-header{
+  margin-top: 10px;
+}
+tbody tr button span{
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  text-overflow: ellipsis;
+  width: 250px;
+  text-align: left;
+}

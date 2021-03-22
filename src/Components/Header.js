@@ -1,24 +1,25 @@
 import React, { Component } from 'react'
-import { Input, Space } from 'antd';
 import 'antd/dist/antd.css';
-
+import { Layout, Input, Row, Col } from 'antd';
+import { GithubOutlined } from '@ant-design/icons';
+const { Header } = Layout;
 const { Search } = Input;
 
 
 export default class header extends Component {
     render() {
         return (
-            <header>
-                <Space direction="vertical">
-                    <Search
-                        placeholder="input search text"
-                        allowClear
-                        enterButton="Search"
-                        size="large"
-                        onSearch={this.props.onSearch}
-                    />
-                </Space>
-            </header>
+            <Layout className="layout">
+            <Header>
+                <div className="logo" />
+                    <Row>
+                        <Col span={6}><GithubOutlined />&nbsp; Sample Project</Col>
+                        <Col span={6}> </Col>
+                        <Col span={6}></Col>
+                        <Col span={6}><Search placeholder="input search text" onSearch={this.props.onSearch} enterButton /> </Col>
+                    </Row>
+            </Header>
+        </Layout>
         )
     }
 }

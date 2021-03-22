@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table } from 'antd';
+import { Table, Row, Col, Button } from 'antd';
 import 'antd/dist/antd.css';
 
 export default class DataTable extends Component {
@@ -10,11 +10,15 @@ export default class DataTable extends Component {
                 {
                     title: 'Repository Name',
                     dataIndex: 'repository',
+                    render: repository => <Button type = "link" onClick={this.onClick} >{repository}</Button>,
+                    ellipsis:true,
+                    width:250
                 },
                 {
                     title: 'Description',
                     dataIndex: 'description',
-                    render: description => <p>{description}</p>,
+                    ellipsis:true,
+                    width:250
                 }
             ],
             data: [ ]
@@ -44,15 +48,25 @@ export default class DataTable extends Component {
         });
     }
 
+    onClick = e =>{
+        console.log(e.target)
+        console.log(e.target.innerText)
+    }
+
     render() {
         return (
             <div>
-                <Table
-                    columns={this.state.columns}
-                    dataSource={this.state.data}
-                    bordered
-                    title={() => 'Repository List'}
-                />
+                <h2 className="table-header">Repository List</h2>
+                <Row justify="center">
+                    
+                    <Col span={20}>
+                    <Table
+                        columns={this.state.columns}
+                        dataSource={this.state.data}
+                        bordered
+                    />
+                    </Col>
+                </Row>
             </div>
         )
     }
