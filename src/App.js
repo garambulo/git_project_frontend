@@ -2,31 +2,16 @@ import './App.css';
 import React, { Component } from 'react'
 import Header from './Components/Header'
 import Footer from './Components/Footer'
-import * as URI from './Library/URIs'
-import DataTable from './Components/DataTable'
+import HomePage from './Pages/HomePage'
+import SearchPage from './Pages/SearchPage'
+import { Route, Switch } from 'react-router-dom';
+import { withRouter } from "react-router";
 
-export default class App extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchedItems: [],
-      itemCount: 0
-    }
-  }
+class App extends Component {
 
   onSearch = (value) => {
-    const apiURI = URI.baseSearchApiURI.concat(value, URI.privateFalseURI, URI.limitPageToHundredURI);
     if (value) {
-      fetch(apiURI)
-        .then((response) => response.json())
-        .then((data) => {
-          this.setState({
-            itemCount: data.total_count,
-            searchedItems: data.items
-          });
-        }
-        );
+        this.props.history.push(`/search/${value}`);
     }
   };
 
@@ -34,10 +19,14 @@ export default class App extends Component {
     return (
       <div className="App">
         <Header onSearch={this.onSearch}></Header>
-        <DataTable searchedItems={this.state.searchedItems}></DataTable>
+        <Switch>
+          <Route path="/" exact component={HomePage} />
+          <Route path="/search/:repositoryName" component={SearchPage} />
+        </Switch>
         <Footer></Footer>
       </div>
     );
   }
 }
 
+export default withRouter(App)
