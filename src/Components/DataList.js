@@ -16,13 +16,13 @@ class DataList extends Component {
             <List
                 itemLayout="horizontal"
                 dataSource={this.props.contributors}
-                header={<div>Contributors</div>}
+                header={<div>{this.props.repositoryName} Contributors</div>}
                 renderItem={contributor => (
                     <List.Item>
                         <List.Item.Meta
                             avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                             title={<p>{contributor.name ? contributor.name : contributor.login}</p>}
-                            description={contributor.location}
+                            description={contributor.location ? contributor.location : 'No location indicated'}
                         />
                     </List.Item>
                 )}

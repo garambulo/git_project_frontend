@@ -8,14 +8,14 @@ class RepositoryInfoPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            contributors: []
+            contributors: [],
+            params : this.props.match.params
         }
     }
 
     getContributors = () => {
-        let params = this.props.match.params;
-        const apiURI = URI.baseRepositoryInfoURI.concat(params.creatorName)
-                                                .concat('/', params.repositoryName)
+        const apiURI = URI.baseRepositoryInfoURI.concat(this.state.params.creatorName)
+                                                .concat('/', this.state.params.repositoryName)
                                                 .concat(URI.contributorsURI);
         fetch(apiURI)
             .then((response) => response.json())
@@ -52,7 +52,7 @@ class RepositoryInfoPage extends Component {
     render() {
         return (
             <div>
-                <DataList contributors={this.state.contributors} />
+                <DataList repositoryName={this.state.params.repositoryName} contributors={this.state.contributors} />
             </div>
         )
     }
