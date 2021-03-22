@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Table, Row, Col, Button } from 'antd';
 import 'antd/dist/antd.css';
+import { withRouter } from "react-router";
 
-export default class DataTable extends Component {
+class DataTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -49,8 +50,8 @@ export default class DataTable extends Component {
     }
 
     onClick = e =>{
-        console.log(e.target)
-        console.log(e.target.innerText)
+        let repositoryName = e.target.innerText;
+        this.props.history.push(`/repository/${repositoryName}`)
     }
 
     render() {
@@ -71,3 +72,5 @@ export default class DataTable extends Component {
         )
     }
 }
+
+export default withRouter(DataTable);

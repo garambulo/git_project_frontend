@@ -15,7 +15,6 @@ class SearchPage extends Component {
     getData = () => {
         let repositoryName = this.props.match.params.repositoryName;
         const apiURI = URI.baseSearchApiURI.concat(repositoryName, URI.privateFalseURI, URI.limitPageToHundredURI);
-        console.log(apiURI)
         fetch(apiURI)
             .then((response) => response.json())
             .then((data) => {
@@ -25,11 +24,15 @@ class SearchPage extends Component {
                 });
             });
     };
-
+    componentDidUpdate(prevProps, prevState) {
+        if(this.props.location !== prevProps.location){
+            this.getData();
+        }
+    }
     componentDidMount(){
         this.getData();
     }
-    
+
     render() {
         return (
             <div>

@@ -4,6 +4,7 @@ import Header from './Components/Header'
 import Footer from './Components/Footer'
 import HomePage from './Pages/HomePage'
 import SearchPage from './Pages/SearchPage'
+import RepositoryInfoPage from './Pages/RepositoryInfoPage'
 import { Route, Switch } from 'react-router-dom';
 import { withRouter } from "react-router";
 
@@ -22,6 +23,7 @@ class App extends Component {
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/search/:repositoryName" component={SearchPage} />
+          <Route path="/repository/:repositoryName" component={RepositoryInfoPage} />
         </Switch>
         <Footer></Footer>
       </div>
