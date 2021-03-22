@@ -4,12 +4,6 @@ import { List, Avatar } from 'antd';
 import 'antd/dist/antd.css';
 
 class DataList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: []
-        }
-    }
 
     render() {
         return (
@@ -21,7 +15,7 @@ class DataList extends Component {
                     <List.Item>
                         <List.Item.Meta
                             avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                            title={<p>{contributor.name ? contributor.name : contributor.login}</p>}
+                            title={<p>{contributor.name ? contributor.name : contributor.login }</p>}
                             description={contributor.location ? contributor.location : 'No location indicated'}
                         />
                     </List.Item>

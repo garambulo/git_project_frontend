@@ -14,7 +14,9 @@ class SearchPage extends Component {
     
     getData = () => {
         let repositoryName = this.props.match.params.repositoryName;
-        const apiURI = URI.baseSearchApiURI.concat(repositoryName, URI.privateFalseURI, URI.limitPageToHundredURI);
+        const apiURI = URI.baseSearchApiURI.concat(repositoryName)
+                                           .concat('&', URI.privateFalseURI)
+                                           .concat('&', URI.limitPageToHundredURI);
         fetch(apiURI)
             .then((response) => response.json())
             .then((data) => {

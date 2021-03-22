@@ -9,50 +9,65 @@ class RepositoryInfoPage extends Component {
         super(props);
         this.state = {
             contributors: [],
-            params : this.props.match.params
+            params: this.props.match.params,
+            commits: []
         }
     }
-
-    getContributors = () => {
-        const apiURI = URI.baseRepositoryInfoURI.concat(this.state.params.creatorName)
+    async fetchContributors(){
+        const apiURI = URI.baseRepositoryInfoURI.concat('/', this.state.params.creatorName)
                                                 .concat('/', this.state.params.repositoryName)
                                                 .concat(URI.contributorsURI);
-        fetch(apiURI)
-            .then((response) => response.json())
-            .then((contributors) => {
-                contributors.forEach(contributor => {
-                    this.getContributorsInfo(contributor.login)
-                });
-            })
-            .then();
+        return await fetch(apiURI).then((response) => response.json());
     }
 
-    getContributorsInfo = (contributor) =>{
+    async fetchContributorInfo(contributor){
         const apiURI = URI.baseURI.concat(URI.usersURI)
-                                  .concat('/', contributor)
+                                  .concat('/', contributor);
+        return await fetch(apiURI).then((response) => response.json());
+    }
 
-        fetch(apiURI).then((response) => response.json()
-                     .then((contributorInfo)=>{
-                        this.setState(prevState => ({
-                            contributors: [...prevState.contributors, contributorInfo ]
-                        }))
-                     } ))
+    async fetchOneHundredCommits(){
+        const apiURI = URI.baseRepositoryInfoURI.concat('/', this.state.params.creatorName)
+                                                .concat('/', this.state.params.repositoryName)
+                                                .concat(URI.commitsURI);
+                                                .concat('?',URI.limitPageToHundredURI);
+        return await fetch(apiURI).then((response) => response.json());
+    }
+
+    async populateData(){
+        let contributorsInfo = []
+        let oneHundredCommits = await this.fetchOneHundredCommits();
+        let contributors = await this.fetchContributors();
+        for await (let contributor of contributors){
+            let contributorInfo = await this.fetchContributorInfo(contributor.login);
+            let contributorCommitCount = oneHundredCommits.filter(commit => contributor.login === commit.author.login).length;
+            contributorInfo.commitCount = contributorCommitCount;
+            contributorsInfo.push(contributorInfo);
+        }
+
+        this.setState({
+            contributors : contributorsInfo,
+            commits: oneHundredCommits
+        })
     }
 
     componentDidMount() {
-        this.getContributors();
+        this.populateData();
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.props.location !== prevProps.location){
-            this.getContributors();
+        if (this.props.location !== prevProps.location) {
+            this.populateData();
         }
     }
 
     render() {
         return (
             <div>
-                <DataList repositoryName={this.state.params.repositoryName} contributors={this.state.contributors} />
+                <DataList repositoryName={this.state.params.repositoryName}
+                    contributors={this.state.contributors}
+                    commits={this.state.commits}
+                    />
             </div>
         )
     }
