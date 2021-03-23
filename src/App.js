@@ -22,7 +22,7 @@ class App extends Component {
         <Header onSearch={this.onSearch}></Header>
         <Switch>
           <Route path="/" exact component={HomePage} />
-          <Route path="/search/:repositoryName" component={SearchPage} />
+          <Route path="/search/:repositoryName/:pageNumber?" component={SearchPage} />
           <Route path="/repository/:creatorName/:repositoryName" component={RepositoryInfoPage} />
         </Switch>
         <Footer></Footer>

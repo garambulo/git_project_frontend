@@ -48,7 +48,7 @@ class DataTable extends Component {
             }))
         });
     }
-
+    
     onClick = e =>{
         let repositoryName = e.target.innerText;
         this.props.history.push(`/repository/${repositoryName}`)
@@ -62,9 +62,17 @@ class DataTable extends Component {
                     
                     <Col span={20}>
                     <Table
+                     
                         columns={this.state.columns}
                         dataSource={this.state.data}
                         bordered
+                        pagination={{
+                            onChange: page => {
+                                this.props.history.push(`/search/${this.props.match.params.repositoryName}/${page}`);
+                            },
+                            current: parseInt(this.props.match.params.pageNumber) || 1,
+                            pageSize: 10,
+                        }}
                     />
                     </Col>
                 </Row>
