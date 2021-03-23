@@ -9,7 +9,6 @@ class SearchPage extends Component {
         super(props);
         this.state = {
             searchedItems: [],
-            itemCount: 0,
             loadingIsVisible: true
         }
     }
@@ -23,12 +22,12 @@ class SearchPage extends Component {
             .then((response) => response.json())
             .then((data) => {
                 this.setState({
-                    itemCount: data.total_count,
                     searchedItems: data.items,
                     loadingIsVisible: false
                 });
             });
     };
+    
     componentDidUpdate(prevProps, prevState) {
         if (this.props.location !== prevProps.location) {
             this.getData();

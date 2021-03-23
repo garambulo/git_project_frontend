@@ -3,10 +3,9 @@ import 'antd/dist/antd.css';
 import { Layout, Input, Row, Col } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+
 const { Header } = Layout;
 const { Search } = Input;
-
-
 
 export default class header extends Component {
     render() {

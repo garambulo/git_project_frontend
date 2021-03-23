@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { withRouter } from "react-router";
 import { List } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-
 import 'antd/dist/antd.css';
 
 class DataList extends Component {

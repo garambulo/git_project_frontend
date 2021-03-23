@@ -1,115 +1,153 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
+
+
 /**
 Header Component
 **/
-section.ant-layout.layout .ant-layout-header{
-  background-color: white;
-  box-shadow: 0 2px 8px #f0f1f2;
+
+section.ant-layout.layout .ant-layout-header {
+    background-color: white;
+    box-shadow: 0 2px 8px #f0f1f2;
 }
-span.ant-input-group-wrapper.ant-input-search.ant-input-search-with-button{
-  margin-top: 15px;
+
+span.ant-input-group-wrapper.ant-input-search.ant-input-search-with-button {
+    margin-top: 15px;
 }
-span.anticon.anticon-github{
-  color: #F07C41;
+
+span.anticon.anticon-github {
+    color: #F07C41;
 }
-button.ant-btn-primary{
-  background-color: #F07C41 !important;
-  border-color: #F07C41 !important;
+
+button.ant-btn-primary {
+    background-color: #F07C41 !important;
+    border-color: #F07C41 !important;
 }
-.ant-btn-primary:active{
-  background-color: #FFA578 !important;
-  border-color: #FFA578 !important;
+
+.ant-btn-primary:active {
+    background-color: #FFA578 !important;
+    border-color: #FFA578 !important;
 }
-.ant-input-search .ant-input:hover, .ant-input-search .ant-input:focus{
-  border-color: #F07C41 !important;
+
+.ant-input-search .ant-input:hover,
+.ant-input-search .ant-input:focus {
+    border-color: #F07C41 !important;
 }
-.ant-layout.layout .ant-col.ant-col-6:nth-child(1){
-  text-align: left;
+
+.ant-layout.layout .ant-col.ant-col-6:nth-child(1) {
+    text-align: left;
 }
+
+
 /**
 Data Table Component
 **/
-.table-header{
-  margin: 20px;
-  text-shadow: gray 1px 0 1px;
-  font-size: 15px;
+
+.table-header {
+    margin: 20px;
+    text-shadow: gray 1px 0 1px;
+    font-size: 15px;
 }
-tbody tr button span{
-  overflow: hidden;
-  white-space: nowrap;
-  display: inline-block;
-  text-overflow: ellipsis;
-  width: 250px;
-  text-align: left;
+
+tbody tr button span {
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    text-overflow: ellipsis;
+    width: 250px;
+    text-align: left;
 }
+
 
 /**
 Data List Component
 **/
-#data-container, #search-container{position: relative;}
-#data-container .ant-list-split .ant-list-header{border-bottom: none;}
-#data-container .ant-list.ant-list-split.ant-list-something-after-last-item{
-  text-align: left;
-  box-shadow: 0 2px 8px #f0f1f2;
-  padding: 10px;
-  width: 80%;
-  display: block;
-  margin: 25px;
+
+#data-container,
+#search-container {
+    position: relative;
 }
-#data-container .repository-container{
-  margin: 20px;
-  text-shadow: gray 1px 0 1px;
-  font-size: 15px;
+
+#data-container .ant-list-split .ant-list-header {
+    border-bottom: none;
 }
-#data-container .data-repository-container, #search-container .data-search-container{width: 100%;}
-#data-container .ant-spin, #search-container .ant-spin {
-  z-index: 10;
-  position: absolute;
-  left: 50%;
+
+#data-container .ant-list.ant-list-split.ant-list-something-after-last-item {
+    text-align: left;
+    box-shadow: 0 2px 8px #f0f1f2;
+    padding: 10px;
+    width: 80%;
+    display: block;
+    margin: 25px;
 }
-#data-container .ant-spin{top:30%;}
-#search-container .ant-spin {top:130%;}
+
+#data-container .repository-container {
+    margin: 20px;
+    text-shadow: gray 1px 0 1px;
+    font-size: 15px;
+}
+
+#data-container .data-repository-container,
+#search-container .data-search-container {
+    width: 100%;
+}
+
+#data-container .ant-spin,
+#search-container .ant-spin {
+    z-index: 10;
+    position: absolute;
+    left: 50%;
+}
+
+#data-container .ant-spin {
+    top: 30%;
+}
+
+#search-container .ant-spin {
+    top: 130%;
+}
+
 
 /**
 * RepositoryInfo Page
 **/
-#timeline-container{
-  margin-top: 35px;
+
+#timeline-container {
+    margin-top: 35px;
 }

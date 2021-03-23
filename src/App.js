@@ -1,7 +1,6 @@
 import './App.css';
 import React, { Component } from 'react'
 import Header from './Components/Header'
-import Footer from './Components/Footer'
 import HomePage from './Pages/HomePage'
 import SearchPage from './Pages/SearchPage'
 import RepositoryInfoPage from './Pages/RepositoryInfoPage'
@@ -25,7 +24,6 @@ class App extends Component {
           <Route path="/search/:repositoryName/:pageNumber?" component={SearchPage} />
           <Route path="/repository/:creatorName/:repositoryName" component={RepositoryInfoPage} />
         </Switch>
-        <Footer></Footer>
       </div>
     );
   }
