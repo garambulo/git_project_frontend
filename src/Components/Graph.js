@@ -10,16 +10,15 @@ class Graph extends Component {
             <Bar
                 data={
                     {
-                        labels: this.props.contributors.map(contributor => contributor.name ? contributor.name : contributor.login),
+                        labels: this.props.labels,
                         datasets: [{
-                            label: 'No. Commits per User',
-                            data: this.props.contributors.map(contributor => contributor.commitCount),
-                            backgroundColor: this.props.contributors.map(contributor => '#F07C41')
-                        }
-                        ]
+                            label: this.props.label,
+                            data: this.props.data,
+                            backgroundColor: this.props.backgroundColor
+                        }]
                     }}
-                height={400}
-                width={600}
+                height={this.props.height}
+                width={this.props.width}
             />
         )
     }

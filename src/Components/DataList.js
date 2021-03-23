@@ -15,7 +15,7 @@ class DataList extends Component {
                     onChange: page => {
                         console.log(page);
                     },
-                    pageSize: 10,
+                    pageSize: 5,
                 }}
                 renderItem={contributor => (
                     <List.Item>

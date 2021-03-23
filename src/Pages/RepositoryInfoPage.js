@@ -13,7 +13,7 @@ class RepositoryInfoPage extends Component {
         this.state = {
             contributors: [],
             params: this.props.match.params,
-            commits: [],
+            commitDates: [],
             loadingIsVisible: true
         }
     }
@@ -38,20 +38,47 @@ class RepositoryInfoPage extends Component {
         return await fetch(apiURI).then((response) => response.json());
     }
 
+    countDateOccurrence(array, dateToBeSearched) {
+        return array.reduce((total, currentDate) => (currentDate === dateToBeSearched ? total + 1 : total), 0);
+    }
+
+    removeDuplicateDates(dates) {
+        return dates.filter((date, index) => dates.indexOf(date) === index);
+    }
+
+    addZeroToMonth(month) {
+        return month < 10 ? ('0' + month) : month
+    }
+
+    reverseDate(date) {
+        let splittedDate = date.split('/');
+        return splittedDate[1].concat('/').concat(splittedDate[0])
+    }
+
     async populateData() {
         let contributorsInfo = []
         let oneHundredCommits = await this.fetchOneHundredCommits();
         let contributors = await this.fetchContributors();
-        console.log(contributors)
         for await (let contributor of contributors) {
             let contributorInfo = await this.fetchContributorInfo(contributor.login);
             let contributorCommitCount = oneHundredCommits.filter(commit => contributor.login === commit.author.login).length;
             contributorInfo.commitCount = contributorCommitCount;
             contributorsInfo.push(contributorInfo);
         }
+        //Get Dates
+        let commitDates = oneHundredCommits.map(repositoryCommit => new Date(repositoryCommit.commit.committer.date))
+            .map(date => (date.getFullYear() + '/' + this.addZeroToMonth((date.getMonth() + 1))))
+            .sort()
+        let uniqueCommitDates = this.removeDuplicateDates(commitDates)
+            .map(date => {
+                return {
+                    date: this.reverseDate(date),
+                    count: this.countDateOccurrence(commitDates, date)
+                }
+            })
         this.setState({
             contributors: contributorsInfo,
-            commits: oneHundredCommits,
+            commitDates: uniqueCommitDates,
             loadingIsVisible: false
         })
     }
@@ -69,23 +96,40 @@ class RepositoryInfoPage extends Component {
     render() {
         return (
             <div id="dataContainer">
-                
+
                 <Loading visible={this.state.loadingIsVisible} />
-                <div className="repositoryContainer">{this.props.repositoryName} Contributors</div>
+                <div className="repositoryContainer">{this.state.params.repositoryName} Contributors</div>
                 <Row>
                     <Col span={12}>
                         <DataList repositoryName={this.state.params.repositoryName}
                             contributors={this.state.contributors}
-                            commits={this.state.commits}
                         />
                     </Col>
-                    <Col span={12}>
+                    <Col span={11}>
                         <Graph repositoryName={this.state.params.repositoryName}
                             contributors={this.state.contributors}
-                            commits={this.state.commits}
+                            label='No. Commits per User'
+                            labels={this.state.contributors.map(contributor => contributor.name ? contributor.name : contributor.login)}
+                            data={this.state.contributors.map(contributor => contributor.commitCount)}
+                            backgroundColor={this.state.contributors.map(() => '#F07C41')}
+                            height={500}
+                            width={600}
                         />
                     </Col>
                 </Row>
+                <Row>
+                    <Col span={23}>
+                        <Graph
+                            label='100 Latest Commits Timeline'
+                            labels={this.state.commitDates.map(commitDate => commitDate.date)}
+                            data={this.state.commitDates.map(commitDate => commitDate.count)}
+                            backgroundColor={this.state.contributors.map(() => '#F07C41')}
+                            height={300}
+                            width={600}
+                        />
+                    </Col>
+                </Row>
+
             </div>
         )
     }
