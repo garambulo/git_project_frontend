@@ -44,7 +44,7 @@ section.ant-layout.layout .ant-layout-header{
   box-shadow: 0 2px 8px #f0f1f2;
 }
 span.ant-input-group-wrapper.ant-input-search.ant-input-search-with-button{
-  margin-top: 5%;
+  margin-top: 15px;
 }
 span.anticon.anticon-github{
   color: #F07C41;
@@ -63,8 +63,10 @@ button.ant-btn-primary{
 /**
 Table
 **/
-h2.table-header{
-  margin-top: 10px;
+.table-header{
+  margin: 20px;
+  text-shadow: gray 1px 0 1px;
+  font-size: 15px;
 }
 tbody tr button span{
   overflow: hidden;
@@ -73,4 +75,22 @@ tbody tr button span{
   text-overflow: ellipsis;
   width: 250px;
   text-align: left;
+}
+
+/**
+Data List
+**/
+#dataContainer .ant-list-split .ant-list-header{border-bottom: none;}
+#dataContainer .ant-list.ant-list-split.ant-list-something-after-last-item{
+  text-align: left;
+  box-shadow: 0 2px 8px #f0f1f2;
+  padding: 10px;
+  width: 80%;
+  display: block;
+  margin: 25px;
+}
+#dataContainer .repositoryContainer{
+  margin: 20px;
+  text-shadow: gray 1px 0 1px;
+  font-size: 15px;
 }

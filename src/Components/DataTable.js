@@ -57,7 +57,7 @@ class DataTable extends Component {
     render() {
         return (
             <div>
-                <h2 className="table-header">Repository List</h2>
+                <div className="table-header">Repository List</div>
                 <Row justify="center">
                     
                     <Col span={20}>

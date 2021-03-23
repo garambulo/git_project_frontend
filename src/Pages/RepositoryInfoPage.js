@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from "react-router";
+import { Row, Col } from 'antd';
 import DataList from '../Components/DataList'
+import Graph from '../Components/Graph'
 import * as URI from '../Library/URIs'
 
 
@@ -13,32 +15,32 @@ class RepositoryInfoPage extends Component {
             commits: []
         }
     }
-    async fetchContributors(){
+    async fetchContributors() {
         const apiURI = URI.baseRepositoryInfoURI.concat('/', this.state.params.creatorName)
-                                                .concat('/', this.state.params.repositoryName)
-                                                .concat(URI.contributorsURI);
+            .concat('/', this.state.params.repositoryName)
+            .concat(URI.contributorsURI);
         return await fetch(apiURI).then((response) => response.json());
     }
 
-    async fetchContributorInfo(contributor){
+    async fetchContributorInfo(contributor) {
         const apiURI = URI.baseURI.concat(URI.usersURI)
-                                  .concat('/', contributor);
+            .concat('/', contributor);
         return await fetch(apiURI).then((response) => response.json());
     }
 
-    async fetchOneHundredCommits(){
+    async fetchOneHundredCommits() {
         const apiURI = URI.baseRepositoryInfoURI.concat('/', this.state.params.creatorName)
-                                                .concat('/', this.state.params.repositoryName)
-                                                .concat(URI.commitsURI)
-                                                .concat('?',URI.limitPageToHundredURI);
+            .concat('/', this.state.params.repositoryName)
+            .concat(URI.commitsURI)
+            .concat('?', URI.limitPageToHundredURI);
         return await fetch(apiURI).then((response) => response.json());
     }
 
-    async populateData(){
+    async populateData() {
         let contributorsInfo = []
         let oneHundredCommits = await this.fetchOneHundredCommits();
         let contributors = await this.fetchContributors();
-        for await (let contributor of contributors){
+        for await (let contributor of contributors) {
             let contributorInfo = await this.fetchContributorInfo(contributor.login);
             let contributorCommitCount = oneHundredCommits.filter(commit => contributor.login === commit.author.login).length;
             contributorInfo.commitCount = contributorCommitCount;
@@ -46,7 +48,7 @@ class RepositoryInfoPage extends Component {
         }
 
         this.setState({
-            contributors : contributorsInfo,
+            contributors: contributorsInfo,
             commits: oneHundredCommits
         })
     }
@@ -63,11 +65,22 @@ class RepositoryInfoPage extends Component {
 
     render() {
         return (
-            <div>
-                <DataList repositoryName={this.state.params.repositoryName}
-                    contributors={this.state.contributors}
-                    commits={this.state.commits}
-                    />
+            <div id="dataContainer">
+                <div className="repositoryContainer">{this.props.repositoryName} Contributors</div>
+                <Row>
+                    <Col span={12}>
+                        <DataList repositoryName={this.state.params.repositoryName}
+                            contributors={this.state.contributors}
+                            commits={this.state.commits}
+                        />
+                    </Col>
+                    <Col span={12}>
+                        <Graph repositoryName={this.state.params.repositoryName}
+                            contributors={this.state.contributors}
+                            commits={this.state.commits}
+                        />
+                    </Col>
+                </Row>
             </div>
         )
     }
