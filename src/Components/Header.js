@@ -13,7 +13,7 @@ export default class header extends Component {
             <Header>
                 <div className="logo" />
                     <Row>
-                        <Col span={6}><GithubOutlined />&nbsp; Sample Project</Col>
+                        <Col span={6}><GithubOutlined />&nbsp; GitHub Project</Col>
                         <Col span={6}> </Col>
                         <Col span={6}></Col>
                         <Col span={6}><Search placeholder="input search text" onSearch={this.props.onSearch} enterButton /> </Col>

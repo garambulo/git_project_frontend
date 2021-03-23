@@ -13,12 +13,12 @@ class SearchPage extends Component {
             loadingIsVisible: true
         }
     }
-    
+
     getData = () => {
         let repositoryName = this.props.match.params.repositoryName;
         const apiURI = URI.baseSearchApiURI.concat(repositoryName)
-                                           .concat('&', URI.privateFalseURI)
-                                           .concat('&', URI.limitPageToHundredURI);
+            .concat('&', URI.privateFalseURI)
+            .concat('&', URI.limitPageToHundredURI);
         fetch(apiURI)
             .then((response) => response.json())
             .then((data) => {
@@ -30,19 +30,21 @@ class SearchPage extends Component {
             });
     };
     componentDidUpdate(prevProps, prevState) {
-        if(this.props.location !== prevProps.location){
+        if (this.props.location !== prevProps.location) {
             this.getData();
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         this.getData();
     }
 
     render() {
         return (
-            <div>
+            <div id="search-container">
                 <Loading visible={this.state.loadingIsVisible} />
-                <DataTable searchedItems={this.state.searchedItems}></DataTable>
+                <div className="data-search-container">
+                    <DataTable searchedItems={this.state.searchedItems}></DataTable>
+                </div>
             </div>
         )
     }

@@ -95,41 +95,47 @@ class RepositoryInfoPage extends Component {
 
     render() {
         return (
-            <div id="dataContainer">
+            <div id="data-container">
 
                 <Loading visible={this.state.loadingIsVisible} />
-                <div className="repositoryContainer">{this.state.params.repositoryName} Contributors</div>
-                <Row>
-                    <Col span={12}>
-                        <DataList repositoryName={this.state.params.repositoryName}
-                            contributors={this.state.contributors}
-                        />
-                    </Col>
-                    <Col span={11}>
-                        <Graph repositoryName={this.state.params.repositoryName}
-                            contributors={this.state.contributors}
-                            label='No. Commits per User'
-                            labels={this.state.contributors.map(contributor => contributor.name ? contributor.name : contributor.login)}
-                            data={this.state.contributors.map(contributor => contributor.commitCount)}
-                            backgroundColor={this.state.contributors.map(() => '#F07C41')}
-                            height={500}
-                            width={600}
-                        />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span={23}>
-                        <Graph
-                            label='100 Latest Commits Timeline'
-                            labels={this.state.commitDates.map(commitDate => commitDate.date)}
-                            data={this.state.commitDates.map(commitDate => commitDate.count)}
-                            backgroundColor={this.state.contributors.map(() => '#F07C41')}
-                            height={300}
-                            width={600}
-                        />
-                    </Col>
-                </Row>
-
+                <div className="data-repository-container">
+                <div className="repository-container">Timeline</div>
+                    <div id="timeline-container">
+                        <Row>
+                            <Col span={1} />
+                            <Col span={22}>
+                                <Graph
+                                    label='100 Latest Commits Timeline'
+                                    labels={this.state.commitDates.map(commitDate => commitDate.date)}
+                                    data={this.state.commitDates.map(commitDate => commitDate.count)}
+                                    backgroundColor={this.state.contributors.map(() => '#B7AC44')}
+                                    height={100}
+                                    width={600}
+                                />
+                            </Col>
+                        </Row>
+                    </div>
+                    <div className="repository-container">{this.state.params.repositoryName} Contributors</div>
+                    <Row>
+                        <Col span={1} />
+                        <Col span={11}>
+                            <DataList repositoryName={this.state.params.repositoryName}
+                                contributors={this.state.contributors}
+                            />
+                        </Col>
+                        <Col span={11}>
+                            <Graph repositoryName={this.state.params.repositoryName}
+                                contributors={this.state.contributors}
+                                label='Commits per User'
+                                labels={this.state.contributors.map(contributor => contributor.name ? contributor.name : contributor.login)}
+                                data={this.state.contributors.map(contributor => contributor.commitCount)}
+                                backgroundColor={this.state.contributors.map(() => '#B7AC44')}
+                                height={270}
+                                width={450}
+                            />
+                        </Col>
+                    </Row>
+                </div>
             </div>
         )
     }
