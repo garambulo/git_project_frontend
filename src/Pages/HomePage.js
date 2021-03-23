@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { withRouter } from "react-router";
+import DataTable from '../Components/DataTable'
 
 class HomePage extends Component {
     render() {
         return (
             <div>
-                <p>This is the home page</p>
+                <DataTable />
             </div>
         )
     }
