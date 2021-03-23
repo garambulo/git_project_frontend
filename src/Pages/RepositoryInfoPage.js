@@ -108,7 +108,7 @@ class RepositoryInfoPage extends Component {
                                     label='100 Latest Commits Timeline'
                                     labels={this.state.commitDates.map(commitDate => commitDate.date)}
                                     data={this.state.commitDates.map(commitDate => commitDate.count)}
-                                    backgroundColor={this.state.contributors.map(() => '#B7AC44')}
+                                    backgroundColor='#B7AC44'
                                     height={100}
                                     width={600}
                                 />
@@ -129,7 +129,7 @@ class RepositoryInfoPage extends Component {
                                 label='Commits per User'
                                 labels={this.state.contributors.map(contributor => contributor.name ? contributor.name : contributor.login)}
                                 data={this.state.contributors.map(contributor => contributor.commitCount)}
-                                backgroundColor={this.state.contributors.map(() => '#B7AC44')}
+                                backgroundColor='#B7AC44'
                                 height={270}
                                 width={450}
                             />
