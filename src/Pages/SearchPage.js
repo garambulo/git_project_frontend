@@ -2,13 +2,15 @@ import React, { Component } from 'react'
 import DataTable from '../Components/DataTable'
 import { withRouter } from "react-router";
 import * as URI from '../Library/URIs'
+import Loading from '../Components/Loading'
 
 class SearchPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             searchedItems: [],
-            itemCount: 0
+            itemCount: 0,
+            loadingIsVisible: true
         }
     }
     
@@ -22,7 +24,8 @@ class SearchPage extends Component {
             .then((data) => {
                 this.setState({
                     itemCount: data.total_count,
-                    searchedItems: data.items
+                    searchedItems: data.items,
+                    loadingIsVisible: false
                 });
             });
     };
@@ -38,6 +41,7 @@ class SearchPage extends Component {
     render() {
         return (
             <div>
+                <Loading visible={this.state.loadingIsVisible} />
                 <DataTable searchedItems={this.state.searchedItems}></DataTable>
             </div>
         )

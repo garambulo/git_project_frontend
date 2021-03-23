@@ -4,6 +4,7 @@ import { Row, Col } from 'antd';
 import DataList from '../Components/DataList'
 import Graph from '../Components/Graph'
 import * as URI from '../Library/URIs'
+import Loading from '../Components/Loading'
 
 
 class RepositoryInfoPage extends Component {
@@ -12,7 +13,8 @@ class RepositoryInfoPage extends Component {
         this.state = {
             contributors: [],
             params: this.props.match.params,
-            commits: []
+            commits: [],
+            loadingIsVisible: true
         }
     }
     async fetchContributors() {
@@ -40,16 +42,17 @@ class RepositoryInfoPage extends Component {
         let contributorsInfo = []
         let oneHundredCommits = await this.fetchOneHundredCommits();
         let contributors = await this.fetchContributors();
+        console.log(contributors)
         for await (let contributor of contributors) {
             let contributorInfo = await this.fetchContributorInfo(contributor.login);
             let contributorCommitCount = oneHundredCommits.filter(commit => contributor.login === commit.author.login).length;
             contributorInfo.commitCount = contributorCommitCount;
             contributorsInfo.push(contributorInfo);
         }
-
         this.setState({
             contributors: contributorsInfo,
-            commits: oneHundredCommits
+            commits: oneHundredCommits,
+            loadingIsVisible: false
         })
     }
 
@@ -66,6 +69,8 @@ class RepositoryInfoPage extends Component {
     render() {
         return (
             <div id="dataContainer">
+                
+                <Loading visible={this.state.loadingIsVisible} />
                 <div className="repositoryContainer">{this.props.repositoryName} Contributors</div>
                 <Row>
                     <Col span={12}>
