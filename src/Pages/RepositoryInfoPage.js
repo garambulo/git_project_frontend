@@ -18,9 +18,12 @@ class RepositoryInfoPage extends Component {
         }
     }
     async fetchContributors() {
-        const apiURI = URI.baseRepositoryInfoURI.concat('/', this.state.params.creatorName)
+        // const apiURI = URI.baseRepositoryInfoURI.concat('/', this.state.params.creatorName)
+        //     .concat('/', this.state.params.repositoryName)
+        //     .concat(URI.contributorsURI);
+        const apiURI = URI.localhostBaseURI.concat(URI.contributorsURI)
+            .concat('/', this.state.params.creatorName)
             .concat('/', this.state.params.repositoryName)
-            .concat(URI.contributorsURI);
         return await fetch(apiURI).then((response) => response.json());
     }
 
