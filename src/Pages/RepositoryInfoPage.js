@@ -28,7 +28,9 @@ class RepositoryInfoPage extends Component {
     }
 
     async fetchContributorInfo(contributor) {
-        const apiURI = URI.baseURI.concat(URI.usersURI)
+        // const apiURI = URI.baseURI.concat(URI.usersURI)
+        //     .concat('/', contributor);
+        const apiURI = URI.localhostBaseURI.concat(URI.userURI)
             .concat('/', contributor);
         return await fetch(apiURI).then((response) => response.json());
     }
@@ -39,10 +41,10 @@ class RepositoryInfoPage extends Component {
         //     .concat(URI.commitsURI)
         //     .concat('?', URI.limitPageToHundredURI);
         const apiURI = URI.localhostBaseURI.concat(URI.commitsURI)
-                                           .concat('/', this.state.params.creatorName )
-                                           .concat('/', this.state.params.repositoryName );
+            .concat('/', this.state.params.creatorName)
+            .concat('/', this.state.params.repositoryName);
         return await fetch(apiURI).then((response) => response.json())
-                                  .then(commits => commits.filter(commit => commit.committer ));
+            .then(commits => commits.filter(commit => commit.committer));
     }
 
     countDateOccurrence(array, dateToBeSearched) {
@@ -106,7 +108,7 @@ class RepositoryInfoPage extends Component {
 
                 <Loading visible={this.state.loadingIsVisible} />
                 <div className="data-repository-container">
-                <div className="repository-container">Timeline</div>
+                    <div className="repository-container">Timeline</div>
                     <div id="timeline-container">
                         <Row>
                             <Col span={1} />
