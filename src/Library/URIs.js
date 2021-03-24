@@ -2,7 +2,7 @@
 export const baseURI = 'https://api.github.com'
 export const baseSearchApiURI = 'https://api.github.com/search/repositories?q=';
 export const baseRepositoryInfoURI = 'https://api.github.com/repos'
-export const localhostBaseURI = 'http://localhost:8080/'
+export const localhostBaseURI = 'http://localhost:8080'
 
 //Additional URI's
 export const contributorsURI = '/contributors'

@@ -31,11 +31,15 @@ class RepositoryInfoPage extends Component {
     }
 
     async fetchOneHundredCommits() {
-        const apiURI = URI.baseRepositoryInfoURI.concat('/', this.state.params.creatorName)
-            .concat('/', this.state.params.repositoryName)
-            .concat(URI.commitsURI)
-            .concat('?', URI.limitPageToHundredURI);
-        return await fetch(apiURI).then((response) => response.json());
+        // const apiURI = URI.baseRepositoryInfoURI.concat('/', this.state.params.creatorName)
+        //     .concat('/', this.state.params.repositoryName)
+        //     .concat(URI.commitsURI)
+        //     .concat('?', URI.limitPageToHundredURI);
+        const apiURI = URI.localhostBaseURI.concat(URI.commitsURI)
+                                           .concat('/', this.state.params.creatorName )
+                                           .concat('/', this.state.params.repositoryName );
+        return await fetch(apiURI).then((response) => response.json())
+                                  .then(commits => commits.filter(commit => commit.committer ));
     }
 
     countDateOccurrence(array, dateToBeSearched) {
@@ -61,7 +65,7 @@ class RepositoryInfoPage extends Component {
         let contributors = await this.fetchContributors();
         for await (let contributor of contributors) {
             let contributorInfo = await this.fetchContributorInfo(contributor.login);
-            let contributorCommitCount = oneHundredCommits.filter(commit => contributor.login === commit.author.login).length;
+            let contributorCommitCount = oneHundredCommits.filter(commit => contributor.login === commit.committer.login).length;
             contributorInfo.commitCount = contributorCommitCount;
             contributorsInfo.push(contributorInfo);
         }
