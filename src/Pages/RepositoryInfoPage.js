@@ -18,9 +18,6 @@ class RepositoryInfoPage extends Component {
         }
     }
     async fetchContributors() {
-        // const apiURI = URI.baseRepositoryInfoURI.concat('/', this.state.params.creatorName)
-        //     .concat('/', this.state.params.repositoryName)
-        //     .concat(URI.contributorsURI);
         const apiURI = URI.localhostBaseURI.concat(URI.contributorsURI)
             .concat('/', this.state.params.creatorName)
             .concat('/', this.state.params.repositoryName)
@@ -28,18 +25,12 @@ class RepositoryInfoPage extends Component {
     }
 
     async fetchContributorInfo(contributor) {
-        // const apiURI = URI.baseURI.concat(URI.usersURI)
-        //     .concat('/', contributor);
         const apiURI = URI.localhostBaseURI.concat(URI.userURI)
             .concat('/', contributor);
         return await fetch(apiURI).then((response) => response.json());
     }
 
     async fetchOneHundredCommits() {
-        // const apiURI = URI.baseRepositoryInfoURI.concat('/', this.state.params.creatorName)
-        //     .concat('/', this.state.params.repositoryName)
-        //     .concat(URI.commitsURI)
-        //     .concat('?', URI.limitPageToHundredURI);
         const apiURI = URI.localhostBaseURI.concat(URI.commitsURI)
             .concat('/', this.state.params.creatorName)
             .concat('/', this.state.params.repositoryName);
