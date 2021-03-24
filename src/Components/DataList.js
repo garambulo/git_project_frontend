@@ -11,9 +11,6 @@ class DataList extends Component {
                 itemLayout="horizontal"
                 dataSource={this.props.contributors}
                 pagination={{
-                    onChange: page => {
-                        console.log(page);
-                    },
                     pageSize: 5,
                 }}
                 renderItem={contributor => (

@@ -3,16 +3,23 @@ import 'antd/dist/antd.css';
 import { Layout, Input, Row, Col } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 
 const { Header } = Layout;
 const { Search } = Input;
 
-export default class header extends Component {
+ class header extends Component {
+    onSearch = (value) => {
+        if (value) {
+            this.props.history.push(`/search/${value}`);
+        }
+    }
+
     render() {
         return (
             <Layout className="layout">
-            <Header>
-                <div className="logo" />
+                <Header>
+                    <div className="logo" />
                     <Row>
                         <Col span={6}>
                             <GithubOutlined />
@@ -21,10 +28,12 @@ export default class header extends Component {
                         </Col>
                         <Col span={6}> </Col>
                         <Col span={6}></Col>
-                        <Col span={6}><Search placeholder="input search text" onSearch={this.props.onSearch} enterButton /> </Col>
+                        <Col span={6}><Search placeholder="input search text" onSearch={this.onSearch} enterButton /> </Col>
                     </Row>
-            </Header>
-        </Layout>
+                </Header>
+            </Layout>
         )
     }
 }
+
+export default withRouter(header)

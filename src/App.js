@@ -5,20 +5,13 @@ import HomePage from './Pages/HomePage'
 import SearchPage from './Pages/SearchPage'
 import RepositoryInfoPage from './Pages/RepositoryInfoPage'
 import { Route, Switch } from 'react-router-dom';
-import { withRouter } from "react-router";
 
-class App extends Component {
-
-  onSearch = (value) => {
-    if (value) {
-        this.props.history.push(`/search/${value}`);
-    }
-  };
+export default class App extends Component {
 
   render() {
     return (
       <div className="App">
-        <Header onSearch={this.onSearch}></Header>
+        <Header />
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/search/:repositoryName/:pageNumber?" component={SearchPage} />
@@ -28,5 +21,3 @@ class App extends Component {
     );
   }
 }
-
-export default withRouter(App)
